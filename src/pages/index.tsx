@@ -105,7 +105,7 @@ const Home: NextPage = () => {
                                   <FormControlLabel
                                     key={el.isEnded}
                                     control={
-                                      <IOSSwitch checked={el.isEnded} />
+                                      <IOSSwitch defaultChecked={el.isEnded} />
                                     }
                                     label=""
                                   />
