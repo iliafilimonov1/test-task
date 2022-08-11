@@ -88,3 +88,29 @@
   padding: 0 33px;
   min-height: 60px;
 }
+
+.ended {
+  text-decoration: line-through;
+}
+
+/* create-task */
+.create {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #A9A9A9;
+}
+.create_title {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #222222;
+}
+
+.task_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+/* end create-task */
