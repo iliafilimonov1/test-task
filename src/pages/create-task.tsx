@@ -2,8 +2,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
+
 import { TaskService, ITask } from "../app/services/task.service";
 import styles from "../styles/Home.module.css";
 
@@ -39,9 +38,7 @@ const CreateTask: NextPage = () => {
 
       <form onSubmit={handleSubmit}>
         <div className={styles.task_wrapper}>
-          <TextField
-            sx={{ marginBottom: "24px" }}
-            variant="outlined"
+          <input
             label="Task id"
             placeholder="Please enter id"
             value={data.id}
@@ -53,10 +50,8 @@ const CreateTask: NextPage = () => {
             }
           />
 
-          <TextField
-            sx={{ marginBottom: "24px" }}
-            variant="outlined"
-            type="date"
+          <input
+            type="text"
             placeholder="Please enter date"
             value={data.date}
             onChange={(e) =>
@@ -67,9 +62,7 @@ const CreateTask: NextPage = () => {
             }
           />
 
-          <Button variant="contained" disabled={isLoading}>
-            Create task
-          </Button>
+          <button disabled={isLoading}>Create task</button>
         </div>
       </form>
     </main>
