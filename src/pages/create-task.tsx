@@ -2,9 +2,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useMutation } from "react-query";
-
-import styles from "../styles/Home.module.css";
+import { TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { TaskService, ITask } from "../app/services/task.service";
+import styles from "../styles/Home.module.css";
 
 const CreateTask: NextPage = () => {
   const [data, setData] = useState<ITask>({
@@ -33,39 +34,45 @@ const CreateTask: NextPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>Create task</h1>
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <form onSubmit={handleSubmit}>
-              <input
-                placeholder="Enter id"
-                value={data.id}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    id: +e.target.value,
-                  })
-                }
-              />
-              <input
-                placeholder="Enter date"
-                value={data.date}
-                onChange={(e) =>
-                  setData({
-                    ...data,
-                    date: e.target.value,
-                  })
-                }
-              />
+    <main className={styles.create}>
+      <h1 className={styles.create_title}>Create task</h1>
 
-              <button disabled={isLoading}>Create</button>
-            </form>
-          </div>
+      <form onSubmit={handleSubmit}>
+        <div className={styles.task_wrapper}>
+          <TextField
+            sx={{ marginBottom: "24px" }}
+            variant="outlined"
+            label="Task id"
+            placeholder="Please enter id"
+            value={data.id}
+            onChange={(e) =>
+              setData({
+                ...data,
+                id: +e.target.value,
+              })
+            }
+          />
+
+          <TextField
+            sx={{ marginBottom: "24px" }}
+            variant="outlined"
+            type="date"
+            placeholder="Please enter date"
+            value={data.date}
+            onChange={(e) =>
+              setData({
+                ...data,
+                date: e.target.value,
+              })
+            }
+          />
+
+          <Button variant="contained" disabled={isLoading}>
+            Create task
+          </Button>
         </div>
-      </main>
-    </div>
+      </form>
+    </main>
   );
 };
 
