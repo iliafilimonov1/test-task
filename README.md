@@ -22,7 +22,7 @@ This project follows a custom structure that combines the following:
 - [`TypeScript`](https://www.typescriptlang.org/) for extending JavaScript to be typed.
 - [`React`](https://reactjs.org/) as the view layer of the app;
 - [`Material-ui`](https://mui.com/) as the UI library;
-- [Next.js](https://nextjs.org/docs) - learn about Next.js features and API.
+- [`Next.js`](https://nextjs.org/docs) - learn about Next.js features and API.
 
 ... and some [more stuff](./package.json).
 
