@@ -4,8 +4,14 @@ const API_URL = "http://localhost:3004";
 
 axios.defaults.baseURL = API_URL;
 
+interface Reminder {
+  title: string; 
+  description: string;
+  isEnded: boolean
+}
+
 export interface ITask {
-  reminder: { title: string; description: string; isEnded: boolean };
+  reminder: Reminder[];
   id: number;
   date: string;
 }
