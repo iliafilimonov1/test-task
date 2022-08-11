@@ -1,7 +1,8 @@
 <div>
   <h1>Todo App</h1>
   
-  <p>This is a [Next.js](https://nextjs.org/) project bootstrapped with [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and uses React, React-query and Typescript.</p>
+  <p>This is a [`Next.js`](https://nextjs.org/docs) project bootstrapped with 
+    [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and uses React, React-query and Typescript.</p>
 </div>
 
 ## Instructions 📋
