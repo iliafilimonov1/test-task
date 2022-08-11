@@ -7,9 +7,9 @@
 
 * Download application
 * Run terminal inside this folder
-* Run yarn install for install dependencies;
+* Run yarn install for install dependencies
 * Start JSON Server with command `json-server --watch db.json --port 3004`
-* After that, run `yarn dev` for running the project.
+* After that, run `yarn dev` for running the project
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
