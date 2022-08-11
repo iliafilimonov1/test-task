@@ -8,7 +8,7 @@
 * Download application and unpack it;
 * Move into unpack folder;
 * Run terminal inside this folder;
-* Run npm ci or yarn ci for install dependencies;
+* Run npm install or yarn install for install dependencies;
 * Start JSON Server with command `json-server --watch db.json`
 * After that, run `npm run dev` or `yarn dev` for running the project.
 
