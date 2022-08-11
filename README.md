@@ -1,6 +1,6 @@
 <div>
   <h1>Todo App</h1>
-  <p>This project bootstrapped with [create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and uses React, React-query, Typescript.</p>
+  <p>This project bootstrapped with create-next-app and uses React, React-query and Typescript.</p>
 </div>
 
 ## Instructions 📋
@@ -19,10 +19,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 This project follows a custom structure that combines the following:
 
-- [`TypeScript`](https://www.typescriptlang.org/) for extending JavaScript to be typed.
-- [`React`](https://reactjs.org/) as the view layer of the app;
-- [`Material-ui`](https://mui.com/) as the UI library;
-- [`Next.js`](https://nextjs.org/docs) - learn about Next.js features and API.
+- [`Next.js`](https://nextjs.org/docs) - learn about Next.js features and API
+- [`React`](https://reactjs.org/) as the view layer of the app
+- [`React-query`](https://react-query-v3.tanstack.com/overview) for data-fetching library for React
+- [`TypeScript`](https://www.typescriptlang.org/) for extending JavaScript to be typed
+- [`Material-ui`](https://mui.com/) as the UI library
 
 ... and some [more stuff](./package.json).
 
