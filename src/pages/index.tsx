@@ -5,66 +5,46 @@ import { Accordion, ThemeProvider } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import { theme } from "../styles/Styles";
+import { IOSSwitch, theme } from "../styles/Styles";
 import { IconButton } from "@mui/material";
 import { Settings } from "@mui/icons-material";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch, { SwitchProps } from "@mui/material/Switch";
-import { styled } from "@mui/material/styles";
-
-const IOSSwitch = styled((props: SwitchProps) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-  width: 42,
-  height: 26,
-  padding: 0,
-  "& .MuiSwitch-switchBase": {
-    padding: 0,
-    margin: 2,
-    transitionDuration: "300ms",
-    "&.Mui-checked": {
-      transform: "translateX(16px)",
-      color: "#fff",
-      "& + .MuiSwitch-track": {
-        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#10C200",
-        opacity: 1,
-        border: 0,
-      },
-      "&.Mui-disabled + .MuiSwitch-track": {
-        opacity: 0.5,
-      },
-    },
-    "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
-      border: "6px solid #fff",
-    },
-    "&.Mui-disabled .MuiSwitch-thumb": {
-      color:
-        theme.palette.mode === "light"
-          ? theme.palette.grey[100]
-          : theme.palette.grey[600],
-    },
-    "&.Mui-disabled + .MuiSwitch-track": {
-      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    boxSizing: "border-box",
-    width: 22,
-    height: 22,
-  },
-  "& .MuiSwitch-track": {
-    borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === "light" ? "#366EFF" : "#39393D",
-    opacity: 1,
-    transition: theme.transitions.create(["background-color"], {
-      duration: 500,
-    }),
-  },
-}));
+import { useEffect, useState } from "react";
+import { ITask } from "../app/services/task.service";
 
 const Home: NextPage = () => {
-  const { isLoading, tasks } = useTasks();
+  const { isLoading, tasks: localTasks } = useTasks();
+
+  const [locTask, setTask] = useState<ITask[] | undefined>();
+
+  useEffect(() => {
+    if (localTasks?.length) {
+      setTask(localTasks);
+    }
+  }, [localTasks]);
+
+  /* change switch of reminders */
+  const changeSwitchHandler = (taskId: number, switchIndex: number) => {
+    const newTasks = locTask?.map((task) => {
+      if (taskId === task.id) {
+        return {
+          ...task,
+          reminder: task.reminder.map((reminder, index) => {
+            if (switchIndex === index) {
+              return {
+                ...reminder,
+                isEnded: !reminder.isEnded,
+              };
+            }
+            return reminder;
+          }),
+        };
+      }
+      return task;
+    });
+
+    setTask(newTasks);
+  };
 
   return (
     <div className={styles.container}>
@@ -78,12 +58,12 @@ const Home: NextPage = () => {
 
         {isLoading ? (
           <div>Loading...</div>
-        ) : tasks?.length ? (
-          <div className={styles.grid}>
-            {tasks.map((task) => {
+        ) : locTask?.length ? (
+          <div className={styles.grid} style={{ marginBottom: 30 }}>
+            {locTask.map((task) => {
               const { reminder: subtasks } = task;
               return (
-                <>
+                <div key={String(task.id)}>
                   <ThemeProvider theme={theme}>
                     <Accordion className={styles.accordion} key={task.id}>
                       <AccordionSummary
@@ -93,31 +73,40 @@ const Home: NextPage = () => {
                         {task.date}
                       </AccordionSummary>
                       <AccordionDetails>
-                        {subtasks.map((el) => {
+                        {subtasks.map((el, index) => {
                           return (
-                            <>
-                              <div className={styles.wrapper}>
-                                <div>
-                                  <h2 key={el.title}>{el.title}</h2>
-                                  <p key={el.description}>{el.description}</p>
-                                </div>
-                                <div>
-                                  <FormControlLabel
-                                    key={el.isEnded}
-                                    control={
-                                      <IOSSwitch defaultChecked={el.isEnded} />
-                                    }
-                                    label=""
-                                  />
-                                </div>
+                            <div key={el.title} className={styles.wrapper}>
+                              <div>
+                                <h2
+                                  className={
+                                    el.isEnded ? styles.ended : undefined
+                                  }
+                                >
+                                  {el.title}
+                                </h2>
+                                <p>{el.description}</p>
                               </div>
-                            </>
+                              <div>
+                                <FormControlLabel
+                                  key={String(index)}
+                                  control={
+                                    <IOSSwitch
+                                      checked={el.isEnded}
+                                      onChange={() =>
+                                        changeSwitchHandler(task.id, index)
+                                      }
+                                    />
+                                  }
+                                  label=""
+                                />
+                              </div>
+                            </div>
                           );
                         })}
                       </AccordionDetails>
                     </Accordion>
                   </ThemeProvider>
-                </>
+                </div>
               );
             })}
           </div>
