@@ -31,6 +31,10 @@ This project follows a custom structure that combines the following:
 
 We use React as a framework for building & rendering our app.
 
+### React-query
+
+React Query is often described as the missing data-fetching library for React, but in more technical terms, it makes fetching, caching, synchronizing and updating server state in your React applications a breeze.
+
 ### TypeScript
 
 TypeScript extends JavaScript by adding types.
