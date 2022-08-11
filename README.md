@@ -9,7 +9,7 @@
 * Move into unpack folder;
 * Run terminal inside this folder;
 * Run npm install or yarn install for install dependencies;
-* Start JSON Server with command `json-server --watch db.json`
+* Start JSON Server with command `json-server --watch db.json --port 3004`
 * After that, run `npm run dev` or `yarn dev` for running the project.
 
 
