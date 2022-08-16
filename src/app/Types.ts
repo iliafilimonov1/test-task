@@ -1,8 +1,8 @@
 /* Separate task */
 export interface ITask {
   reminder: Reminder[];
-  id: number;
-  date: string;
+  id: string;
+  date: number;
 }
 
 /* Need to do in each one of task */

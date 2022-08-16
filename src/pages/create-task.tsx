@@ -6,11 +6,12 @@ import { useMutation } from "react-query";
 import { TaskService } from "../app/services/task.service";
 import { ITask, Reminder } from "../app/Types";
 import styles from "../styles/Home.module.css";
+import { generateId } from "../app/utils/helper";
 
 const CreateTask: NextPage = () => {
   const [data, setData] = useState<ITask>({
-    id: Math.random() * 1000,
-    date: "",
+    id: generateId(),
+    date: Date.now(),
     reminder: [],
   } as ITask);
 
