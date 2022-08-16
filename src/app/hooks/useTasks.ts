@@ -12,7 +12,7 @@ export const useTasks = () => {
       select: ({ data }): ITask[] =>
         data.map((task) => ({
           ...task,
-          date: task.date + " !",
+          date: task.date,
         })),
     }
   );
