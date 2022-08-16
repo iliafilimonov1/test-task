@@ -8,11 +8,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import { IOSSwitch, theme } from "../styles/Styles";
 import { IconButton } from "@mui/material";
 import { Settings } from "@mui/icons-material";
+import AddIcon from "@mui/icons-material/Add";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useEffect, useState } from "react";
-import { ITask } from "../app/services/task.service";
+import { ITask } from "../app/Types";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const createTaskRouter = useRouter();
+
   const { isLoading, tasks: localTasks } = useTasks();
 
   const [locTask, setTask] = useState<ITask[] | undefined>();
@@ -22,6 +26,14 @@ const Home: NextPage = () => {
       setTask(localTasks);
     }
   }, [localTasks]);
+
+
+  /* open create task page */
+  const openCreateTaskPage = (e: any) => {
+    e.preventDefault();
+    createTaskRouter.push("/create-task");
+  };
+  
 
   /* change switch of reminders */
   const changeSwitchHandler = (taskId: number, switchIndex: number) => {
@@ -73,36 +85,37 @@ const Home: NextPage = () => {
                         {task.date}
                       </AccordionSummary>
                       <AccordionDetails>
-                        {subtasks.map((el, index) => {
-                          return (
-                            <div key={el.title} className={styles.wrapper}>
-                              <div>
-                                <h2
-                                  className={
-                                    el.isEnded ? styles.ended : undefined
-                                  }
-                                >
-                                  {el.title}
-                                </h2>
-                                <p>{el.description}</p>
+                        {subtasks &&
+                          subtasks.map((el, index) => {
+                            return (
+                              <div key={el.title} className={styles.wrapper}>
+                                <div>
+                                  <h2
+                                    className={
+                                      el.isEnded ? styles.ended : undefined
+                                    }
+                                  >
+                                    {el.title}
+                                  </h2>
+                                  <p>{el.description}</p>
+                                </div>
+                                <div>
+                                  <FormControlLabel
+                                    key={String(index)}
+                                    control={
+                                      <IOSSwitch
+                                        checked={el.isEnded}
+                                        onChange={() =>
+                                          changeSwitchHandler(task.id, index)
+                                        }
+                                      />
+                                    }
+                                    label=""
+                                  />
+                                </div>
                               </div>
-                              <div>
-                                <FormControlLabel
-                                  key={String(index)}
-                                  control={
-                                    <IOSSwitch
-                                      checked={el.isEnded}
-                                      onChange={() =>
-                                        changeSwitchHandler(task.id, index)
-                                      }
-                                    />
-                                  }
-                                  label=""
-                                />
-                              </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
                       </AccordionDetails>
                     </Accordion>
                   </ThemeProvider>
@@ -113,6 +126,10 @@ const Home: NextPage = () => {
         ) : (
           <div>Elements not found</div>
         )}
+
+        <IconButton size="large" onClick={openCreateTaskPage}>
+          <AddIcon sx={{ fontSize: 30, color: "#f4f4f4" }} />
+        </IconButton>
       </main>
     </div>
   );
